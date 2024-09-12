@@ -1,7 +1,29 @@
+let displayValue = 0;
 let firstOperand = 0;
-let operation = '';
-let secondOperand = 0; 
+let firstOperation = null;
+let secondOperand = 0;
+let secondOperation = null;
 
+const display = document.querySelector("#output");
+
+let operationButtons = Array.from(document.querySelectorAll('.operation'));
+let operandButtons = Array.from(document.querySelectorAll('.operand'));
+
+console.table(operandButtons);
+
+for (button of operandButtons) {
+  button.addEventListener("click", (e) => {
+    console.log(`You clicked the ${e.target.textContent} button`);
+    displayValue = displayValue * 10 + parseInt(e.target.textContent);
+    display.textContent = displayValue;
+  })
+}
+
+for (button of operationButtons) {
+  button.addEventListener("clicK", (e) => {
+    console.log(`You clicked the ${e.target.textContent} button`);
+  })
+}
 
 
 const operate = function(op, a, b) {
