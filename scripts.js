@@ -8,8 +8,7 @@ const display = document.querySelector("#output");
 
 let operationButtons = Array.from(document.querySelectorAll('.operation'));
 let operandButtons = Array.from(document.querySelectorAll('.operand'));
-
-console.table(operandButtons);
+let clearButton = document.querySelector('#clear');
 
 for (button of operandButtons) {
   button.addEventListener("click", (e) => {
@@ -20,11 +19,36 @@ for (button of operandButtons) {
 }
 
 for (button of operationButtons) {
-  button.addEventListener("clicK", (e) => {
+  button.addEventListener("click", (e) => {
     console.log(`You clicked the ${e.target.textContent} button`);
+
+    if (!firstOperand) {
+      firstOperand = displayValue;
+      firstOperation = e.target.id;
+      displayValue = 0;
+    } else {
+      secondOperand = displayValue;
+      secondOperation = e.target.id;
+      displayValue = operate(firstOperation, firstOperand, secondOperand);
+      firstOperand = displayValue;
+      display.textContent = displayValue;
+      displayValue = 0;
+      secondOperand = 0;
+      firstOperation = secondOperation;
+      secondOperation = null;
+
+    }
   })
 }
 
+clearButton.addEventListener('click', () => {
+  displayValue = 0;
+  firstOperand = 0;
+  firstOperation = null;
+  secondOperand = 0;
+  secondOperation = null;
+  display.textContent = displayValue;
+})
 
 const operate = function(op, a, b) {
   switch(true) {
