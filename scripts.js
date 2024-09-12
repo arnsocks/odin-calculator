@@ -1,15 +1,21 @@
-const operate = function(a, operation, b) {
+let firstOperand = 0;
+let operation = '';
+let secondOperand = 0; 
+
+
+
+const operate = function(op, a, b) {
   switch(true) {
-    case (operation === 'add'):
+    case (op === 'add'):
       console.log(`We are adding.`);
       return add(a, b);
-    case (operation === 'subtract'):
+    case (op === 'subtract'):
       console.log('We are subtracting.');
       return subtract(a,b);
-    case (operation === 'multiply'):
+    case (op === 'multiply'):
       console.log('We are multiplying');
       return multiply(a,b);
-    case (operation === 'divide'):
+    case (op === 'divide'):
       console.log("We are dividing");
       return divide(a,b);
     default:
