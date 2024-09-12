@@ -1,6 +1,11 @@
+*{
+  box-sizing: border-box;
+}
 body{
   background-color: aquamarine;
 }
+
+
 
 #container {
   display: flex;
@@ -12,6 +17,7 @@ body{
   width: 600px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 #display {
@@ -20,26 +26,29 @@ body{
   border: 1px solid gray;
   height: 50px;
   width: 600px;
+  margin-bottom: 2px;
 }
 
 #button-container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: stretch;
   gap: 2px;
   width: 600px;
 }
 
 .row{
   display: flex;
-  justify-content: center;
+  justify-content: stretch;
+  gap: 2px;
 }
 
 button{
-  height: 75px;
-  flex-grow: 1;
+  height: 100px;
+  flex-basis: 25%;
+  gap: 2px;
 }
 
-#clear{
-  flex-grow:3;
+.double{
+  flex-basis: calc(50% + 2px); /*Size to account for the 2px gap*/
 }
