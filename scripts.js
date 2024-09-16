@@ -1,14 +1,15 @@
 let displayValue = 0;
-let firstOperand = 0;
+let firstOperand = null;
 let firstOperation = null;
-let secondOperand = 0;
+let secondOperand = null;
 let secondOperation = null;
 
 const display = document.querySelector("#output");
 
-let operationButtons = Array.from(document.querySelectorAll('.operation'));
-let operandButtons = Array.from(document.querySelectorAll('.operand'));
-let clearButton = document.querySelector('#clear');
+const operationButtons = Array.from(document.querySelectorAll('.operation'));
+const operandButtons = Array.from(document.querySelectorAll('.operand'));
+const clearButton = document.querySelector('#clear');
+const equalsButton = document.querySelector('#equals');
 
 for (button of operandButtons) {
   button.addEventListener("click", (e) => {
@@ -33,19 +34,29 @@ for (button of operationButtons) {
       firstOperand = displayValue;
       display.textContent = displayValue;
       displayValue = 0;
-      secondOperand = 0;
+      secondOperand = null;
       firstOperation = secondOperation;
       secondOperation = null;
-
     }
   })
 }
 
+equalsButton.addEventListener('click', () => {
+  console.log('You clicked equals');
+  secondOperand = displayValue;
+  displayValue = operate(firstOperation, firstOperand, secondOperand);
+  firstOperand = displayValue;
+  display.textContent = displayValue;
+  firstOperation = null;
+  secondOperand = null; 
+
+})
+
 clearButton.addEventListener('click', () => {
   displayValue = 0;
-  firstOperand = 0;
+  firstOperand = null;
   firstOperation = null;
-  secondOperand = 0;
+  secondOperand = null;
   secondOperation = null;
   display.textContent = displayValue;
 })
@@ -65,8 +76,8 @@ const operate = function(op, a, b) {
       console.log("We are dividing");
       return divide(a,b);
     default:
-      console.log("I do not recognize that operation");
-      return "Error: operation not recognized";
+      //console.log("I do not recognize that operation");
+      return displayValue;
   }
 }
 
