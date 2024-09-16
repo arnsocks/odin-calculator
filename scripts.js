@@ -2,7 +2,7 @@ let displayValue = 0;
 let firstOperand = null;
 let firstOperation = null;
 let secondOperand = null;
-let secondOperation = null;
+let result = null;
 
 const display = document.querySelector("#output");
 
@@ -29,35 +29,27 @@ for (button of operationButtons) {
       displayValue = 0;
     } else {
       secondOperand = displayValue;
-      secondOperation = e.target.id;
-      displayValue = operate(firstOperation, firstOperand, secondOperand);
-      firstOperand = displayValue;
-      display.textContent = displayValue;
+      result = operate(firstOperation, firstOperand, secondOperand);
+      firstOperand = result;
+      display.textContent = result;
       displayValue = 0;
+      firstOperation = null;
       secondOperand = null;
-      firstOperation = secondOperation;
-      secondOperation = null;
+
+    }
+    if (e.target.id != 'equals') {
+      firstOperation = e.target.id;
+      console.log("You didn't click equals");
     }
   })
 }
-
-equalsButton.addEventListener('click', () => {
-  console.log('You clicked equals');
-  secondOperand = displayValue;
-  displayValue = operate(firstOperation, firstOperand, secondOperand);
-  firstOperand = displayValue;
-  display.textContent = displayValue;
-  firstOperation = null;
-  secondOperand = null; 
-
-})
 
 clearButton.addEventListener('click', () => {
   displayValue = 0;
   firstOperand = null;
   firstOperation = null;
   secondOperand = null;
-  secondOperation = null;
+  result = null;
   display.textContent = displayValue;
 })
 
@@ -77,7 +69,7 @@ const operate = function(op, a, b) {
       return divide(a,b);
     default:
       //console.log("I do not recognize that operation");
-      return displayValue;
+      return result;
   }
 }
 
@@ -94,5 +86,5 @@ const multiply = function(a,b) {
 }
 
 const divide = function(a,b) {
-  return b == 0 ? `I can't do that, Dave` : (a / b);
+  return b == 0 ? `I could never` : (a / b);
 }
