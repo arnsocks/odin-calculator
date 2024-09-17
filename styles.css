@@ -2,8 +2,9 @@
   box-sizing: border-box;
 }
 body{
-  background-color: aquamarine;
+  background-color: white;
 }
+
 
 
 
@@ -18,45 +19,59 @@ body{
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  background-color: black;
+  padding: 10px;
+  box-sizing: content-box;
 }
 
 #display {
   justify-self: center;
   background-color: lightgray;
   border: 1px solid gray;
-  height: 50px;
+  height: 85px;
   width: 600px;
-  margin-bottom: 2px;
+  margin-bottom: 10px;
   font-family:  monospace;
-  font-size: 48px;
+  font-size: 80px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding: 10px;
 }
 
 #button-container{
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  gap: 2px;
+  gap: 6px;
   width: 600px;
 }
 
 .row{
   display: flex;
   justify-content: stretch;
-  gap: 2px;
+  gap: 6px;
 }
 
 button{
   height: 100px;
   flex-basis: 25%;
-  gap: 2px;
   font-family: sans-serif;
   font-size: 76px;
-  
+  border: none;
 }
 
+.operand {
+  background-color: #ebdab5;
+}
+.operation {
+  background-color: #154d68;
+  color: #ebdab5;
+}
+.command {
+  background-color: #016a3e;
+  color: #ebdab5;
+}
 .double{
-  flex-basis: calc(50% + 2px); /*Size to account for the 2px gap*/
+  flex-basis: calc(50% + 6px); /*Size to account for the 2px gap*/
 }

@@ -5,7 +5,10 @@ let secondOperand = null;
 let result = null;
 let hitEquals = false;
 
+const DISPLAY_LENGTH = 12;
+
 const display = document.querySelector("#output");
+display.textContent = displayValue;
 
 const operationButtons = Array.from(document.querySelectorAll('.operation'));
 const operandButtons = Array.from(document.querySelectorAll('.operand'));
@@ -15,6 +18,11 @@ const equalsButton = document.querySelector('#equals');
 for (button of operandButtons) {
   button.addEventListener("click", (e) => {
     console.log(`You clicked the ${e.target.textContent} button`);
+
+    // limit the display length to 12 characters
+    if (displayValue > 999999999999) {
+      return;
+    }
 
     let keyValue = parseInt(e.target.textContent);
 
@@ -106,5 +114,5 @@ const multiply = function(a,b) {
 }
 
 const divide = function(a,b) {
-  return b == 0 ? `I could never` : (a / b);
+  return b == 0 ? `I could never.` : (a / b);
 }
