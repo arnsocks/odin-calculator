@@ -42,7 +42,7 @@ for (button of operandButtons) {
     }
   
     displayValue = displayValue.concat(e.target.textContent);
-    display.textContent = displayValue;
+    updateDisplay();
   })
 }
 
@@ -57,9 +57,10 @@ for (button of operationButtons) {
       displayValue = '0';
     } else {
       secondOperand = displayValue;
-      result = operate(firstOperation, firstOperand, secondOperand);
+      result = operate(firstOperation, firstOperand, secondOperand).toString();
       firstOperand = result;
-      display.textContent = result;
+      displayValue = result;
+      updateDisplay();
       displayValue = '0';
       secondOperand = null;
       firstOperation = e.target.id;
@@ -70,16 +71,15 @@ for (button of operationButtons) {
 equalsButton.addEventListener('click', () => {
   if (firstOperation) {
     secondOperand = displayValue;
-    result = operate(firstOperation, firstOperand, secondOperand);
+    result = operate(firstOperation, firstOperand, secondOperand).toString();
     firstOperand = result;
-    display.textContent = result;
+    displayValue = result;
+    updateDisplay();
     displayValue = '0';
     firstOperation = null;
     secondOperand = null;
     hitEquals = true;
-  } else {
-    //displayValue = 0;
-  }
+  } 
 })
 
 clearButton.addEventListener('click', () => {
@@ -88,12 +88,12 @@ clearButton.addEventListener('click', () => {
   firstOperation = null;
   secondOperand = null;
   result = null;
-  display.textContent = displayValue;
+  updateDisplay();
 })
 
 signButton.addEventListener('click', () => {
   displayValue *= -1;
-  display.textContent = displayValue;
+  updateDisplay();
 })
 
 const operate = function(op, a, b) {
@@ -125,4 +125,13 @@ const multiply = function(a,b) {
 
 const divide = function(a,b) {
   return b == 0 ? `Nooooooope` : (a / b);
+}
+
+const updateDisplay = function() {
+  // make sure the result fits in the display window
+  if (displayValue.length > 12) {
+    displayValue = parseFloat(displayValue).toExponential(6);
+  }
+  display.textContent = displayValue;
+  
 }
