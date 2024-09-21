@@ -1,4 +1,4 @@
-let displayValue = 0;
+let displayValue = '0';
 let firstOperand = null;
 let firstOperation = null;
 let secondOperand = null;
@@ -20,21 +20,29 @@ for (button of operandButtons) {
   button.addEventListener("click", (e) => {
     console.log(`You clicked the ${e.target.textContent} button`);
 
-    // limit the display length to 12 characters
-    if (displayValue > 999999999999) {
+    // limit the displayValue length to fit in the display window
+    if (displayValue >= 10 ** (DISPLAY_LENGTH - 1)) {
       return;
     }
 
-    let keyValue = parseInt(e.target.textContent);
+    // don't add a . if there's already a .
+    if (displayValue % 1 != 0 && e.target.textContent == ".") {
+      return;
+    }
 
+    // get rid of the leading 0;
+    if (displayValue == "0") {
+      displayValue = "";
+    }
+
+    // Clear the first Operand if the last key pressed was "="
     if (hitEquals) {
       firstOperand = null;
       hitEquals = false;
     }
-    
-    displayValue = displayValue * 10 + keyValue;
+  
+    displayValue = displayValue.concat(e.target.textContent);
     display.textContent = displayValue;
-    
   })
 }
 
@@ -45,13 +53,13 @@ for (button of operationButtons) {
     if (!firstOperand) {
       firstOperand = displayValue;
       firstOperation = e.target.id;
-      displayValue = 0;
+      displayValue = '0';
     } else {
       secondOperand = displayValue;
       result = operate(firstOperation, firstOperand, secondOperand);
       firstOperand = result;
       display.textContent = result;
-      displayValue = 0;
+      displayValue = '0';
       secondOperand = null;
       firstOperation = e.target.id;
     }
@@ -64,7 +72,7 @@ equalsButton.addEventListener('click', () => {
     result = operate(firstOperation, firstOperand, secondOperand);
     firstOperand = result;
     display.textContent = result;
-    displayValue = 0;
+    displayValue = '0';
     firstOperation = null;
     secondOperand = null;
     hitEquals = true;
@@ -74,7 +82,7 @@ equalsButton.addEventListener('click', () => {
 })
 
 clearButton.addEventListener('click', () => {
-  displayValue = 0;
+  displayValue = '0';
   firstOperand = null;
   firstOperation = null;
   secondOperand = null;
@@ -102,7 +110,6 @@ const operate = function(op, a, b) {
       console.log("We are dividing");
       return divide(a,b);
     default:
-      //console.log("I do not recognize that operation");
       return result;
   }
 }
