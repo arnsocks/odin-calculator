@@ -50,6 +50,7 @@ for (button of operationButtons) {
   button.addEventListener("click", (e) => {
     console.log(`You clicked the ${e.target.textContent} button`);
     hitEquals = false;
+    
     if (!firstOperand) {
       firstOperand = displayValue;
       firstOperation = e.target.id;
@@ -98,16 +99,12 @@ signButton.addEventListener('click', () => {
 const operate = function(op, a, b) {
   switch(true) {
     case (op === 'add'):
-      console.log(`We are adding.`);
       return add(a, b);
     case (op === 'subtract'):
-      console.log('We are subtracting.');
       return subtract(a,b);
     case (op === 'multiply'):
-      console.log('We are multiplying');
       return multiply(a,b);
     case (op === 'divide'):
-      console.log("We are dividing");
       return divide(a,b);
     default:
       return result;
