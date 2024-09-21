@@ -14,6 +14,7 @@ const operationButtons = Array.from(document.querySelectorAll('.operation'));
 const operandButtons = Array.from(document.querySelectorAll('.operand'));
 const clearButton = document.querySelector('#clear');
 const equalsButton = document.querySelector('#equals');
+const signButton = document.querySelector("#sign");
 
 for (button of operandButtons) {
   button.addEventListener("click", (e) => {
@@ -81,6 +82,11 @@ clearButton.addEventListener('click', () => {
   display.textContent = displayValue;
 })
 
+signButton.addEventListener('click', () => {
+  displayValue *= -1;
+  display.textContent = displayValue;
+})
+
 const operate = function(op, a, b) {
   switch(true) {
     case (op === 'add'):
@@ -114,5 +120,5 @@ const multiply = function(a,b) {
 }
 
 const divide = function(a,b) {
-  return b == 0 ? `I could never.` : (a / b);
+  return b == 0 ? `Nooooooope` : (a / b);
 }
